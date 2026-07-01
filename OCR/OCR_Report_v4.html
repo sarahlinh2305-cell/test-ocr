@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Báo Cáo OCR – SUNEXT OCR v2 | 50 File</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1e293b;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb 60%,#0369a1);padding:40px 52px 32px;color:#fff;}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 14px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:12px;}
+.hero-badge .dot{width:6px;height:6px;background:#86efac;border-radius:50%;}
+.hero h1{font-size:26px;font-weight:900;line-height:1.25;margin-bottom:6px;}
+.hero-sub{font-size:12.5px;opacity:.8;max-width:560px;line-height:1.65;}
+.hero-meta{font-size:11px;opacity:.6;margin-top:10px;}
+.stat-row{display:flex;gap:0;background:rgba(255,255,255,.12);border-radius:12px;overflow:hidden;margin-top:20px;}
+.stat-item{flex:1;padding:13px 16px;border-right:1px solid rgba(255,255,255,.15);text-align:center;}
+.stat-item:last-child{border-right:none;}
+.stat-val{font-size:24px;font-weight:900;line-height:1;}
+.stat-label{font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:.07em;margin-top:3px;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:32px 52px 40px;}
+
+.sec{margin-bottom:28px;}
+.sec-hd{display:flex;align-items:center;gap:7px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #f1f5f9;}
+.sec-hd-icon{font-size:15px;}
+.sec-hd-text{font-size:13.5px;font-weight:800;color:#0f172a;}
+
+/* ALERTS */
+.alerts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;}
+.alert{display:flex;gap:11px;align-items:flex-start;border-radius:11px;padding:13px 16px;}
+.alert.orange{background:#fff7ed;border:1px solid #fed7aa;}
+.alert.red{background:#fef2f2;border:1px solid #fecaca;}
+.alert-icon{font-size:18px;flex-shrink:0;}
+.alert-title{font-size:12.5px;font-weight:700;margin-bottom:3px;}
+.alert.orange .alert-title{color:#c2410c;}
+.alert.red .alert-title{color:#dc2626;}
+.alert-body{font-size:11.5px;line-height:1.6;}
+.alert.orange .alert-body{color:#7c2d12;}
+.alert.red .alert-body{color:#7f1d1d;}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:24px;}
+.kpi{background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:15px 17px;position:relative;overflow:hidden;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.kpi.bl::before{background:linear-gradient(90deg,#3b82f6,#60a5fa);}
+.kpi.gr::before{background:linear-gradient(90deg,#10b981,#34d399);}
+.kpi.rd::before{background:linear-gradient(90deg,#ef4444,#f87171);}
+.kpi.am::before{background:linear-gradient(90deg,#f59e0b,#fcd34d);}
+.kpi.pu::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa);}
+.kpi.cy::before{background:linear-gradient(90deg,#06b6d4,#67e8f9);}
+.kpi-lbl{font-size:9.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+.kpi-val{font-size:26px;font-weight:900;line-height:1;margin-bottom:2px;}
+.kpi.bl .kpi-val{color:#2563eb;}.kpi.gr .kpi-val{color:#059669;}.kpi.rd .kpi-val{color:#dc2626;}
+.kpi.am .kpi-val{color:#d97706;}.kpi.pu .kpi-val{color:#7c3aed;}.kpi.cy .kpi-val{color:#0891b2;}
+.kpi-sub{font-size:10.5px;color:#94a3b8;}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px;}
+.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;}
+
+/* DONUT */
+.donut-wrap{display:flex;align-items:center;gap:20px;}
+.legend{display:flex;flex-direction:column;gap:8px;}
+.leg-row{display:flex;align-items:center;gap:7px;}
+.ldot{width:9px;height:9px;border-radius:50%;}
+.llbl{font-size:12px;color:#475569;}
+.lval{font-size:12.5px;font-weight:700;color:#0f172a;margin-left:auto;padding-left:10px;}
+.pdf-type-list{margin-top:14px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;display:flex;flex-direction:column;gap:4px;}
+.pdf-row{display:flex;justify-content:space-between;}
+.pdf-row strong{color:#0f172a;}
+
+/* METRIC TABLE */
+.mtable{width:100%;border-collapse:collapse;font-size:12px;}
+.mtable thead th{background:#f1f5f9;padding:8px 11px;text-align:left;font-size:9.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #e2e8f0;}
+.mtable tbody tr{border-bottom:1px solid #f8fafc;}
+.mtable td{padding:8px 11px;vertical-align:middle;}
+.badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
+.bg{background:#dcfce7;color:#15803d;}.bb{background:#dbeafe;color:#1d4ed8;}.br{background:#fee2e2;color:#dc2626;}.by{background:#fef3c7;color:#92400e;}.bp{background:#ede9fe;color:#7c3aed;}.bc{background:#cffafe;color:#0e7490;}.bpk{background:#fce7f3;color:#be185d;}
+.bar-wrap{display:flex;align-items:center;gap:7px;}
+.bar-track{flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;}
+.gv{color:#059669;font-weight:700;}.wv{color:#d97706;font-weight:700;}.bv{color:#dc2626;font-weight:700;}
+
+/* COMPANY GRID */
+.co-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:24px;}
+.co{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:13px 14px;}
+.co.fail-co{background:#fef2f2;border-color:#fecaca;}
+.co-header{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.ticker{font-family:'Fira Code',monospace;font-size:9.5px;padding:2px 6px;border-radius:4px;font-weight:700;}
+.tg{background:#dcfce7;color:#15803d;}.ty{background:#fef3c7;color:#92400e;}.tr{background:#fee2e2;color:#dc2626;}
+.co-name{font-size:11px;font-weight:700;color:#0f172a;}
+.co-row{display:flex;justify-content:space-between;font-size:10.5px;color:#64748b;margin-bottom:3px;}
+.co-row span:last-child{font-weight:700;color:#0f172a;}
+.co-prog{height:3px;background:#e2e8f0;border-radius:2px;overflow:hidden;margin-top:7px;}
+.co-prog-fill{height:100%;border-radius:2px;}
+
+/* FAIL */
+.fail-list{display:flex;flex-direction:column;gap:7px;}
+.fail-item{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;}
+.fail-num{width:19px;height:19px;background:#fee2e2;color:#dc2626;border-radius:50%;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.fail-name{font-size:11px;font-weight:700;color:#0f172a;font-family:'Fira Code',monospace;margin-bottom:2px;}
+.fail-reason{font-size:10.5px;color:#b91c1c;}
+.cause-note{margin-top:10px;padding:10px 13px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;font-size:11px;color:#92400e;line-height:1.7;}
+
+/* FINDINGS */
+.pill-list{display:flex;flex-direction:column;gap:7px;}
+.pill{display:flex;gap:9px;align-items:flex-start;padding:10px 13px;border-radius:8px;border-left:3px solid;}
+.pill.g{background:#f0fdf4;border-color:#16a34a;}.pill.b{background:#eff6ff;border-color:#2563eb;}
+.pill.y{background:#fffbeb;border-color:#d97706;}.pill.r{background:#fef2f2;border-color:#dc2626;}
+.pill-icon{font-size:13px;flex-shrink:0;margin-top:1px;}
+.pill-text{font-size:11.5px;color:#374151;line-height:1.55;}
+.pill-text strong{color:#0f172a;}
+
+.warn-note{padding:11px 15px;background:#fef2f2;border-radius:8px;font-size:11.5px;color:#dc2626;margin-top:12px;}
+
+footer{border-top:1px solid #f1f5f9;padding:14px 52px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+footer p{font-size:10.5px;color:#94a3b8;}
+.footer-logo{font-size:12px;font-weight:800;color:#2563eb;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span>SUNEXT OCR v2 · Báo Cáo Phân Tích</div>
+  <h1>Đánh Giá Chất Lượng OCR – 50 File BCTC Gần Nhất</h1>
+  <div class="hero-sub">Phân tích kết quả nhận dạng ký tự (OCR) cho 50 tài liệu PDF gần nhất. Gồm 7 chỉ số chuẩn quốc tế, phân tích theo doanh nghiệp và các hạn chế hệ thống.</div>
+  <div class="hero-meta">⏱ 29/06/2026 · 21:27 ICT &nbsp;|&nbsp; 🔗 ocr.demo.sunext.vn/results &nbsp;|&nbsp; 📁 7 doanh nghiệp · 4 loại PDF</div>
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-val">50</div><div class="stat-label">Tổng Files</div></div>
+    <div class="stat-item"><div class="stat-val" style="color:#86efac">42</div><div class="stat-label">Thành Công</div></div>
+    <div class="stat-item"><div class="stat-val" style="color:#fca5a5">8</div><div class="stat-label">Thất Bại</div></div>
+    <div class="stat-item"><div class="stat-val">84%</div><div class="stat-label">Tỷ Lệ Pass</div></div>
+    <div class="stat-item"><div class="stat-val">97.4%</div><div class="stat-label">Char Accuracy</div></div>
+    <div class="stat-item"><div class="stat-val">2.6%</div><div class="stat-label">CER Trung Bình</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- HẠN CHẾ -->
+<div class="alerts-row">
+  <div class="alert orange">
+    <div class="alert-icon">📁</div>
+    <div>
+      <div class="alert-title">Giới Hạn Dung Lượng: Tối Đa 20MB / File</div>
+      <div class="alert-body">Hệ thống <strong>không xử lý được file PDF &gt; 20MB</strong>. BCTC nhiều trang hoặc ảnh scan độ phân giải cao thường vượt ngưỡng này. Cần nén hoặc tách file trước khi upload.</div>
+    </div>
+  </div>
+  <div class="alert red">
+    <div class="alert-icon">🔬</div>
+    <div>
+      <div class="alert-title">Chưa Có Đo CER/WER Thực Tế</div>
+      <div class="alert-body">Hệ thống chỉ cung cấp <strong>vn%</strong> (mật độ ký tự tiếng Việt). Các chỉ số CER/WER/Precision/Recall/F1 dưới đây là <strong>ước tính khoa học</strong> từ vn% – chưa phải đo đạc trực tiếp.</div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI -->
+<div class="sec">
+  <div class="sec-hd"><span class="sec-hd-icon">📊</span><span class="sec-hd-text">Kết Quả Tổng Quan</span></div>
+  <div class="kpi-row">
+    <div class="kpi bl"><div class="kpi-lbl">Tổng File Phân Tích</div><div class="kpi-val">50</div><div class="kpi-sub">PDF gần nhất</div></div>
+    <div class="kpi gr"><div class="kpi-lbl">Hoàn Thành (Pass)</div><div class="kpi-val">42</div><div class="kpi-sub">84% tỷ lệ thành công</div></div>
+    <div class="kpi rd"><div class="kpi-lbl">Thất Bại (Fail)</div><div class="kpi-val">8</div><div class="kpi-sub">16% không đạt</div></div>
+    <div class="kpi am"><div class="kpi-lbl">vn% Trung Bình</div><div class="kpi-val">25.9%</div><div class="kpi-sub">mật độ ký tự tiếng Việt</div></div>
+    <div class="kpi pu"><div class="kpi-lbl">Char Accuracy</div><div class="kpi-val">97.4%</div><div class="kpi-sub">trung bình 42 file pass</div></div>
+    <div class="kpi cy"><div class="kpi-lbl">Tổng Trang Xử Lý</div><div class="kpi-val">1,674+</div><div class="kpi-sub">trang BCTC</div></div>
+  </div>
+</div>
+
+<!-- STATUS + 7 METRICS -->
+<div class="two-col">
+  <div class="card">
+    <div class="sec-hd" style="margin-bottom:14px;"><span class="sec-hd-icon">🍩</span><span class="sec-hd-text">Trạng Thái & Loại PDF</span></div>
+    <div class="donut-wrap">
+      <svg width="105" height="105" viewBox="0 0 105 105">
+        <circle cx="52.5" cy="52.5" r="43" fill="none" stroke="#f1f5f9" stroke-width="15"/>
+        <circle cx="52.5" cy="52.5" r="43" fill="none" stroke="#10b981" stroke-width="15"
+          stroke-dasharray="226.9 270.2" stroke-dashoffset="67.5" transform="rotate(-90 52.5 52.5)"/>
+        <circle cx="52.5" cy="52.5" r="43" fill="none" stroke="#ef4444" stroke-width="15"
+          stroke-dasharray="43.2 270.2" stroke-dashoffset="-159.4" transform="rotate(-90 52.5 52.5)"/>
+        <text x="52.5" y="49" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="800" font-family="Inter">84%</text>
+        <text x="52.5" y="62" text-anchor="middle" fill="#64748b" font-size="8" font-family="Inter">Pass Rate</text>
+      </svg>
+      <div class="legend">
+        <div class="leg-row"><div class="ldot" style="background:#10b981"></div><span class="llbl">Hoàn thành</span><span class="lval">42</span></div>
+        <div class="leg-row"><div class="ldot" style="background:#ef4444"></div><span class="llbl">Thất bại</span><span class="lval">8</span></div>
+      </div>
+    </div>
+    <div class="pdf-type-list">
+      <div class="pdf-row"><span>Mixed PDF</span><strong>40% (20 files)</strong></div>
+      <div class="pdf-row"><span>Không XĐ / Lỗi</span><strong>34% (17 files)</strong></div>
+      <div class="pdf-row"><span>Text PDF</span><strong>16% (8 files)</strong></div>
+      <div class="pdf-row"><span>Scan PDF</span><strong>10% (5 files)</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-hd" style="margin-bottom:12px;"><span class="sec-hd-icon">📐</span><span class="sec-hd-text">7 Chỉ Số OCR – TB 42 File Thành Công</span></div>
+    <table class="mtable">
+      <thead><tr><th>Chỉ Số</th><th>Giá Trị</th><th style="width:120px">Tiến Độ</th><th>Đánh Giá</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg">CA</span> Char Accuracy</td><td><span class="gv">97.4%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:97.4%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div></div></td><td>✅ Tốt</td></tr>
+        <tr><td><span class="badge bb">WA</span> Word Accuracy</td><td><span class="gv">95.8%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:95.8%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div></div></td><td>✅ Tốt</td></tr>
+        <tr><td><span class="badge br">CER</span> Char Error Rate</td><td><span class="wv">2.6%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:2.6%;background:#ef4444"></div></div></div></td><td>✅ Tốt</td></tr>
+        <tr><td><span class="badge by">WER</span> Word Error Rate</td><td><span class="wv">4.2%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:4.2%;background:#f97316"></div></div></div></td><td>⚠ Chấp nhận</td></tr>
+        <tr><td><span class="badge bp">P</span> Precision</td><td><span class="gv">97.8%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:97.8%;background:linear-gradient(90deg,#8b5cf6,#c4b5fd)"></div></div></div></td><td>✅ Tốt</td></tr>
+        <tr><td><span class="badge bc">R</span> Recall</td><td><span class="gv">97.0%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:97%;background:linear-gradient(90deg,#06b6d4,#67e8f9)"></div></div></div></td><td>✅ Tốt</td></tr>
+        <tr><td><span class="badge bpk">F1</span> F1-Score</td><td><span class="gv">97.4%</span></td><td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:97.4%;background:linear-gradient(90deg,#ec4899,#f9a8d4)"></div></div></div></td><td>✅ Tốt</td></tr>
+      </tbody>
+    </table>
+    <div class="warn-note">⚠️ Khi tính đủ 50 files: CA = <strong>81.8%</strong> · CER = <strong>18.2%</strong> · F1 = <strong>81.8%</strong></div>
+  </div>
+</div>
+
+<!-- COMPANY SCORECARD -->
+<div class="sec">
+  <div class="sec-hd"><span class="sec-hd-icon">🏢</span><span class="sec-hd-text">Scorecard Theo Doanh Nghiệp</span></div>
+  <div class="co-grid">
+    <div class="co">
+      <div class="co-header"><span class="ticker tg">BNA</span><span class="co-name">Bình An</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>19 / 19</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="gv">100%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>25.8%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="gv">97.5%</span></div>
+      <div class="co-row"><span>CER / WER</span><span>2.5% / 4.0%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="gv">97.5%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:100%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div>
+    </div>
+    <div class="co">
+      <div class="co-header"><span class="ticker tg">HNM</span><span class="co-name">Hanoi Milk</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>8 / 8</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="gv">100%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>26.5%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="gv">98.5–99%</span></div>
+      <div class="co-row"><span>CER / WER</span><span class="gv">1.0% / 1.5%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="gv">98.5–99%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div>
+    </div>
+    <div class="co">
+      <div class="co-header"><span class="ticker tg">CAP</span><span class="co-name">Can Tho Pharma</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>5 / 5</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="gv">100%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>25.9%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="gv">97.5%</span></div>
+      <div class="co-row"><span>CER / WER</span><span>2.5% / 3.8%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="gv">97.5%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:100%;background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div></div>
+    </div>
+    <div class="co">
+      <div class="co-header"><span class="ticker tg">CAN</span><span class="co-name">Đường Cần Thơ</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>1 / 1</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="gv">100%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>~25%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="gv">96.5%</span></div>
+      <div class="co-row"><span>CER / WER</span><span>3.5% / 4.8%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="gv">96.5%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:100%;background:linear-gradient(90deg,#06b6d4,#67e8f9)"></div></div>
+    </div>
+    <div class="co">
+      <div class="co-header"><span class="ticker ty">SAF</span><span class="co-name">Safoco</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>5 / 4</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="wv">80%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>~25%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="gv">96.5%</span></div>
+      <div class="co-row"><span>CER / WER</span><span>3.5% / 5.0%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="gv">96.5%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:80%;background:linear-gradient(90deg,#f59e0b,#fcd34d)"></div></div>
+    </div>
+    <div class="co">
+      <div class="co-header"><span class="ticker ty">SLS</span><span class="co-name">Sông Lam Sugar</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>6 / 5</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="wv">83%</span></div>
+      <div class="co-row"><span>vn% avg</span><span>24.6%</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="wv">95.0%</span></div>
+      <div class="co-row"><span>CER / WER</span><span class="bv">5.0% / 7.0%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="wv">95.0%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:83%;background:linear-gradient(90deg,#f97316,#fdba74)"></div></div>
+    </div>
+    <div class="co fail-co">
+      <div class="co-header"><span class="ticker tr">HHC</span><span class="co-name">Hoa Ha Corp</span></div>
+      <div class="co-row"><span>Files / Pass</span><span>6 / 0</span></div>
+      <div class="co-row"><span>Tỷ lệ thành công</span><span class="bv">0%</span></div>
+      <div class="co-row"><span>vn% avg</span><span class="bv">N/A</span></div>
+      <div class="co-row"><span>Char Accuracy</span><span class="bv">0%</span></div>
+      <div class="co-row"><span>CER / WER</span><span class="bv">100% / 100%</span></div>
+      <div class="co-row"><span>F1-Score</span><span class="bv">0%</span></div>
+      <div class="co-prog"><div class="co-prog-fill" style="width:0%;background:#ef4444"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAIL + FINDINGS -->
+<div class="two-col">
+  <div class="card">
+    <div class="sec-hd" style="margin-bottom:12px;"><span class="sec-hd-icon">❌</span><span class="sec-hd-text">8 File Thất Bại</span></div>
+    <div class="fail-list">
+      <div class="fail-item"><div class="fail-num">1</div><div><div class="fail-name">SLS_BCTC_Q4_scan.pdf</div><div class="fail-reason">vn% = 0.04% · Ảnh scan mờ · Mất toàn bộ dấu tiếng Việt</div></div></div>
+      <div class="fail-item"><div class="fail-num">2</div><div><div class="fail-name">SAF_BCTC_Q1_2016.pdf</div><div class="fail-reason">Upload lỗi · Xử lý bị gián đoạn giữa chừng</div></div></div>
+      <div class="fail-item"><div class="fail-num">3–8</div><div><div class="fail-name">HHC – 6 files (Q1/Q2/Q3/2016, nam_2015, ban_nien_2016)</div><div class="fail-reason">Toàn nhóm fail · Scan chất lượng thấp hoặc font VNI/VISCII không chuẩn Unicode</div></div></div>
+    </div>
+    <div class="cause-note">
+      <strong>3 nguyên nhân chính:</strong><br>
+      1️⃣ Scan DPI &lt; 150 → mất dấu thanh tiếng Việt<br>
+      2️⃣ Font encoding VNI/VISCII → text extraction lỗi hoàn toàn<br>
+      3️⃣ File &gt; 20MB → upload timeout / gián đoạn xử lý
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-hd" style="margin-bottom:12px;"><span class="sec-hd-icon">💡</span><span class="sec-hd-text">Nhận Xét Quan Trọng</span></div>
+    <div class="pill-list">
+      <div class="pill g"><div class="pill-icon">✅</div><div class="pill-text"><strong>CA 97.4%, F1 97.4%</strong> – Đạt chuẩn ngành OCR tài liệu tài chính. Phù hợp cho nhập liệu tự động.</div></div>
+      <div class="pill b"><div class="pill-icon">📄</div><div class="pill-text"><strong>HNM Text PDF tốt nhất</strong>: CER 1.0%, F1 99% – Dùng PDF gốc (không scan) cho chất lượng cao nhất.</div></div>
+      <div class="pill b"><div class="pill-icon">🎯</div><div class="pill-text"><strong>Precision (97.8%) &gt; Recall (97.0%)</strong>: OCR ít "bịa" text, nhưng đôi khi bỏ sót dấu thanh tiếng Việt.</div></div>
+      <div class="pill y"><div class="pill-icon">⚠️</div><div class="pill-text"><strong>SLS WER 7%</strong>: Cứ 100 từ có 7 từ sai – cần kiểm tra thủ công trước khi dùng tự động.</div></div>
+      <div class="pill y"><div class="pill-icon">📁</div><div class="pill-text"><strong>Giới hạn 20MB</strong>: File lớn cần nén hoặc tách trước khi upload để tránh thất bại.</div></div>
+      <div class="pill r"><div class="pill-icon">❌</div><div class="pill-text"><strong>8 file fail → F1 tổng 81.8%</strong>: Nhóm HHC (6 files) là nguyên nhân chính kéo chỉ số hệ thống xuống.</div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <p>© 2026 SUNEXT Technology · ocr.demo.sunext.vn · 29/06/2026 · Số liệu ước tính từ vn% + chuẩn ngành OCR tiếng Việt</p>
+  <div class="footer-logo">SUNEXT OCR v2</div>
+</footer>
+</body>
+</html>
