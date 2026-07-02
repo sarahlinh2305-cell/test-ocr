@@ -97,7 +97,8 @@
             Check: () => <svg className="w-5 h-5 text-success inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
             X: () => <svg className="w-5 h-5 text-danger inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>,
             Alert: () => <svg className="w-5 h-5 text-warning inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>,
-            Document: () => <svg className="w-5 h-5 text-gray-500 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            Document: () => <svg className="w-5 h-5 text-gray-500 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
+            ExternalLink: () => <svg className="w-4 h-4 inline mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
         };
 
         // --- Các Component UI cơ bản ---
@@ -160,40 +161,50 @@
                 </Card>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card className="border-t-4 border-blue-500">
-                        <div className="flex items-start justify-between">
+                    <Card className="border-t-4 border-blue-500 flex flex-col h-full">
+                        <div className="flex items-start justify-between mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-gray-800">BCTC Quý III/2017</h3>
-                                <p className="text-blue-600 font-medium mb-4">Trạng thái: Thành công cục bộ</p>
+                                <p className="text-blue-600 font-medium">Trạng thái: Thành công cục bộ</p>
                             </div>
-                            <div className="bg-blue-50 text-blue-700 font-bold text-2xl p-4 rounded-full border border-blue-100">65/100</div>
+                            <div className="bg-blue-50 text-blue-700 font-bold text-2xl p-4 rounded-full border border-blue-100 flex-shrink-0">65/100</div>
                         </div>
-                        <ul className="space-y-3 text-sm text-gray-600 mb-6">
+                        <ul className="space-y-3 text-sm text-gray-600 flex-grow mb-6">
                             <li><Icons.Check /> Giữ được định dạng bảng Markdown (TSR tốt).</li>
                             <li><Icons.Alert /> CER: 3-5% | WER: 7-10% (Lỗi dấu).</li>
                             <li><Icons.X /> Gãy luồng đọc ở phần chân trang do dấu đỏ chồng lấp chữ ký.</li>
                         </ul>
-                        <button onClick={() => window.setGlobalTab('success')} className="w-full py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium transition-colors">
-                            Xem chi tiết phân tích
-                        </button>
+                        <div className="flex space-x-3 mt-auto">
+                            <button onClick={() => window.setGlobalTab('success')} className="flex-1 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium transition-colors flex items-center justify-center">
+                                Xem phân tích
+                            </button>
+                            <a href="https://ocr.demo.sunext.vn/results/3LTRPofHRsrh73zLexOu" target="_blank" rel="noopener noreferrer" className="flex-1 py-2 bg-gray-50 text-gray-700 text-center rounded-lg hover:bg-gray-100 font-medium transition-colors border border-gray-200 flex items-center justify-center">
+                                <Icons.ExternalLink /> Link gốc
+                            </a>
+                        </div>
                     </Card>
 
-                    <Card className="border-t-4 border-red-500">
-                        <div className="flex items-start justify-between">
+                    <Card className="border-t-4 border-red-500 flex flex-col h-full">
+                        <div className="flex items-start justify-between mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-gray-800">BCTC Quý IV/2017</h3>
-                                <p className="text-red-600 font-medium mb-4">Trạng thái: Thất bại toàn diện</p>
+                                <p className="text-red-600 font-medium">Trạng thái: Thất bại toàn diện</p>
                             </div>
-                            <div className="bg-red-50 text-red-700 font-bold text-2xl p-4 rounded-full border border-red-100">10/100</div>
+                            <div className="bg-red-50 text-red-700 font-bold text-2xl p-4 rounded-full border border-red-100 flex-shrink-0">10/100</div>
                         </div>
-                        <ul className="space-y-3 text-sm text-gray-600 mb-6">
+                        <ul className="space-y-3 text-sm text-gray-600 flex-grow mb-6">
                             <li><Icons.X /> Mất hoàn toàn cấu trúc bảng (Table Flattening).</li>
                             <li><Icons.X /> Lỗi chính tả trầm trọng, sinh mã ASCII vô nghĩa.</li>
                             <li><Icons.X /> Không nhận diện được ngôn ngữ Tiếng Việt (mất dấu).</li>
                         </ul>
-                        <button onClick={() => window.setGlobalTab('failure')} className="w-full py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium transition-colors">
-                            Xem chi tiết phân tích
-                        </button>
+                        <div className="flex space-x-3 mt-auto">
+                            <button onClick={() => window.setGlobalTab('failure')} className="flex-1 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium transition-colors flex items-center justify-center">
+                                Xem phân tích
+                            </button>
+                            <a href="https://ocr.demo.sunext.vn/results/pG2Rs7WBFkMm1VOqkdJX" target="_blank" rel="noopener noreferrer" className="flex-1 py-2 bg-gray-50 text-gray-700 text-center rounded-lg hover:bg-gray-100 font-medium transition-colors border border-gray-200 flex items-center justify-center">
+                                <Icons.ExternalLink /> Link gốc
+                            </a>
+                        </div>
                     </Card>
                 </div>
 
@@ -239,6 +250,17 @@
 
             return (
                 <div className="space-y-6 animate-fade-in">
+                    {/* Header Link Block */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-blue-50 p-5 rounded-xl border border-blue-100 gap-4">
+                        <div>
+                            <h3 className="font-bold text-blue-900 text-lg">BCTC Quý III/2017 - Công ty CP Mía đường Sơn La</h3>
+                            <p className="text-sm text-blue-700 mt-1">Trạng thái: Thành công cục bộ (Bóc tách được bảng biểu nhưng lỗi chân trang)</p>
+                        </div>
+                        <a href="https://ocr.demo.sunext.vn/results/3LTRPofHRsrh73zLexOu" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors shadow-sm flex items-center whitespace-nowrap">
+                            <Icons.ExternalLink /> Xem kết quả gốc trên Web
+                        </a>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <Card title="Đánh giá Tài liệu & Chỉ số" className="border-t-4 border-blue-500">
                             <ul className="space-y-3 text-sm">
@@ -279,6 +301,17 @@
 
             return (
                 <div className="space-y-6 animate-fade-in">
+                    {/* Header Link Block */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-red-50 p-5 rounded-xl border border-red-100 gap-4 mb-2">
+                        <div>
+                            <h3 className="font-bold text-red-900 text-lg">BCTC Quý IV/2017 - Công ty CP Mía đường Sơn La</h3>
+                            <p className="text-sm text-red-700 mt-1">Trạng thái: Thất bại toàn diện (Mất hoàn toàn cấu trúc và ngôn ngữ)</p>
+                        </div>
+                        <a href="https://ocr.demo.sunext.vn/results/pG2Rs7WBFkMm1VOqkdJX" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium transition-colors shadow-sm flex items-center whitespace-nowrap">
+                            <Icons.ExternalLink /> Xem kết quả gốc trên Web
+                        </a>
+                    </div>
+
                     <div className="bg-red-100 border-l-4 border-red-500 p-4 rounded text-red-800">
                         <strong>Thất bại toàn diện (Catastrophic Failure):</strong> Output trả về là một mớ văn bản hỗn độn (gibberish), mất hoàn toàn dấu tiếng Việt, cấu trúc bảng bị làm phẳng (flattened text), vùng có nhiễu bị nhận dạng thành mã ASCII rác.
                     </div>
